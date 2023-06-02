@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(
           primary: Color(0xffAB00A4),
           onPrimary: Colors.white,
+          onSecondary: secondaryTextColor,
         ),
         useMaterial3: true,
       ),

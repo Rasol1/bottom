@@ -1,4 +1,5 @@
-import 'package:bottom/bottom.dart';
+import 'package:bottom/defaultbottom.dart';
+import 'package:bottom/primumBottom.dart';
 import 'package:flutter/material.dart';
 
 class Page1 extends StatefulWidget {
@@ -9,56 +10,65 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> {
-  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     final ThemeData myThemeDate = Theme.of(context);
     return Scaffold(
-      body: SafeArea(
-          child: Stack(
-        children: [
-          Container(
-            height: double.infinity,
-            child: Image.asset(
-              'assets/images/background1.jpg',
-              fit: BoxFit.fill,
-            ),
+      body: SafeArea(child: pagebody(myThemeDate)),
+    );
+  }
+
+  Stack pagebody(ThemeData myThemeDate) {
+    return Stack(
+      children: [
+        //_____________     backgroung Image     _____________
+
+        Container(
+          height: double.infinity,
+          child: Image.asset(
+            'assets/images/background1.jpg',
+            fit: BoxFit.fill,
           ),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                colors: [
-                  Colors.white10,
-                  Colors.black12,
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                DefaultBottom(
-                  onBackgroundColor: myThemeDate.colorScheme.onPrimary,
-                    backgroundColor: myThemeDate.colorScheme.primary,
-                    pathIcon: 'assets/icons/ghost.png',
-                    mainText: "Generate primum picture",
-                    secondText: 'Free'),
-                DefaultBottom(
-                  onBackgroundColor: myThemeDate.colorScheme.onPrimary,
-                  backgroundColor: myThemeDate.colorScheme.primary,
-                  pathIcon: 'assets/icons/octopus.png',
-                  mainText: "Generate octopus level picture",
-                  secondText: 'Free',
-                ),
+        ),
+
+        //____________      background gradient       ______________
+
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [
+                Colors.white10,
+                Colors.black12,
               ],
             ),
-          )
-        ],
-      )),
+          ),
+        ),
+
+        // _______________    bottom    ___________________
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            DefaultBottom(
+              secondTextColor: myThemeDate.colorScheme.onSecondary,
+              onBackgroundColor: myThemeDate.colorScheme.onPrimary,
+              backgroundColor: myThemeDate.colorScheme.primary,
+              pathIcon: 'assets/icons/ghost.png',
+              mainText: "Generate primum picture",
+              secondText: 'Free',
+            ),
+            PrimumBottom(
+              onBackgroundColor: myThemeDate.colorScheme.onPrimary,
+              backgroundColor: myThemeDate.colorScheme.primary,
+              pathIcon: 'assets/icons/octopus.png',
+              mainText: "Generate octopus level picture",
+              coinNumber: 15,
+              coinColor: Color(0xffFFC809),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
