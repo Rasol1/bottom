@@ -1,5 +1,6 @@
 import 'package:bottom/page1.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +12,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final Color secondaryTextColor = Colors.white70;
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
-        textTheme: TextTheme(bodyLarge:Google. ),
+        textTheme: TextTheme(
+          bodyLarge: GoogleFonts.nunito(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          bodyMedium: GoogleFonts.nunito(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: secondaryTextColor,
+          ),
+        ),
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
@@ -31,7 +43,10 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.light(
+          primary: Color(0xffAB00A4),
+          onPrimary: Colors.white,
+        ),
         useMaterial3: true,
       ),
       home: const Page1(),
