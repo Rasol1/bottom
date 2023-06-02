@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // ignore: must_be_immutable
 
@@ -98,11 +99,7 @@ class _DefaultBottomState extends State<DefaultBottom> {
       return Row(
         children: [
           ClipRRect(
-            child: Image.asset(
-              widget.pathIcon,
-              width: 30,
-              color: widget.onBackgroundColor,
-            ),
+            child: SvgPicture.asset(widget.pathIcon)
           ),
           SizedBox(
             width: 5,

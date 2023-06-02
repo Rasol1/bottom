@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 // ____________     start primum bottom     ______________
 
 class PrimumBottom extends StatefulWidget {
@@ -103,11 +104,7 @@ class _PrimumBottomState extends State<PrimumBottom> {
       return Row(
         children: [
           ClipRRect(
-            child: Image.asset(
-              widget.pathIcon,
-              width: 30,
-              color: widget.onBackgroundColor,
-            ),
+            child: SvgPicture.asset(widget.pathIcon,)
           ),
           SizedBox(
             width: 5,
