@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,8 +12,10 @@ class PrimumBottom extends StatefulWidget {
   final Color backgroundColor;
   final Color onBackgroundColor;
   final Color coinColor;
+  final onTap;
+  final bool isloading;
 
-  PrimumBottom({
+  const PrimumBottom({
     super.key,
     required this.pathIcon,
     required this.mainText,
@@ -19,6 +23,8 @@ class PrimumBottom extends StatefulWidget {
     required this.backgroundColor,
     required this.onBackgroundColor,
     required this.coinColor,
+    required this.onTap,
+    required this.isloading,
   });
 
   @override
@@ -31,32 +37,6 @@ class _PrimumBottomState extends State<PrimumBottom> {
     lineWidth: 2,
     size: 35.0,
   );
-  bool isLoading = false;
-  bool isClickBottom = false;
-// fonction for loding bottom
-
-  handleButtonClick() {
-    // check the button not clickable
-    if (isClickBottom) {
-      return ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('The button has already been clicked'),
-        ),
-      );
-      ;
-    } else {
-      setState(() {
-        isLoading = true;
-        isClickBottom = true;
-      });
-//  for time loding
-      Future.delayed(Duration(seconds: 2), () {
-        setState(() {
-          isLoading = false;
-        });
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +50,7 @@ class _PrimumBottomState extends State<PrimumBottom> {
   InkWell bottom(
       ThemeData myTextTheme, double screenHeight, double screenWidth) {
     return InkWell(
-      onTap: isLoading ? null : handleButtonClick,
+      onTap: widget.onTap,
       child: bottomBody(
           myTextTheme, screenHeight, screenWidth), // get the bottom style/body
     );
@@ -80,14 +60,14 @@ class _PrimumBottomState extends State<PrimumBottom> {
   Container bottomBody(
       ThemeData myTextTheme, double screenHeight, double screenWidth) {
     return Container(
-      padding: EdgeInsets.fromLTRB(12, 8, 12, 8),
-      margin: EdgeInsets.fromLTRB(26, 4, 26, 4),
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+      margin: const EdgeInsets.fromLTRB(26, 4, 26, 4),
       height: screenHeight * 0.085,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: widget.backgroundColor,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(color: Colors.grey, blurRadius: 10, offset: Offset.zero)
           ]),
       child: bottomChild(
@@ -98,15 +78,16 @@ class _PrimumBottomState extends State<PrimumBottom> {
 
 //___________      bottom children      _____________
   bottomChild(ThemeData myThemeData, double screenWidth) {
-    if (isLoading)
+    if (widget.isloading)
       return spinkit;
     else {
       return Row(
         children: [
           ClipRRect(
-            child: SvgPicture.asset(widget.pathIcon,)
-          ),
-          SizedBox(
+              child: SvgPicture.asset(
+            widget.pathIcon,
+          )),
+          const SizedBox(
             width: 5,
           ),
           Column(
@@ -119,12 +100,8 @@ class _PrimumBottomState extends State<PrimumBottom> {
               ),
               Row(
                 children: [
-                  Container(
-                    child: Image.asset(
-                      'assets/icons/coin.png',
-                      color: widget.coinColor,
-                      width: screenWidth * 0.045,
-                    ),
+                  SvgPicture.asset(
+                    "assets/icons/coin.svg",
                   ),
                   Text(
                     widget.coinNumber.toString(),

@@ -10,6 +10,30 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> {
+  bool isLoading = false;
+  bool isClickBottom = false;
+// fonction for loding bottom
+
+  handleButtonClick() {
+    // check the button not clickable
+    if (isClickBottom) {
+      return 
+      ;
+      
+    } else {
+      setState(() {
+        isLoading = true;
+        isClickBottom = true;
+      });
+//  for time loding
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() {
+          isLoading = false;
+        });
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData myThemeDate = Theme.of(context);
@@ -23,7 +47,7 @@ class _Page1State extends State<Page1> {
       children: [
         //_____________     backgroung Image     _____________
 
-        Container(
+        SizedBox(
           height: double.infinity,
           child: Image.asset(
             'assets/images/background1.jpg',
@@ -34,7 +58,7 @@ class _Page1State extends State<Page1> {
         //____________      background gradient       ______________
 
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               colors: [
@@ -57,6 +81,8 @@ class _Page1State extends State<Page1> {
               pathIcon: 'assets/icons/ghost.svg',
               mainText: "Generate primum picture",
               secondText: 'Free',
+              onTap: isLoading ? null : handleButtonClick,
+              isloading: isLoading,
             ),
             PrimumBottom(
               onBackgroundColor: myThemeDate.colorScheme.onPrimary,
@@ -64,7 +90,9 @@ class _Page1State extends State<Page1> {
               pathIcon: 'assets/icons/octopus.svg',
               mainText: "Generate octopus level picture",
               coinNumber: 15,
-              coinColor: Color(0xffFFC809),
+              coinColor: const Color(0xffFFC809),
+              isloading: isLoading,
+              onTap: isLoading?null:handleButtonClick(),
             ),
           ],
         )
@@ -72,5 +100,3 @@ class _Page1State extends State<Page1> {
     );
   }
 }
-
-class SpinKitFadingCircle {}

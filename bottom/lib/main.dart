@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final Color secondaryTextColor = Colors.white70;
+    const Color secondaryTextColor = Colors.white70;
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: Color(0xffAB00A4),
           onPrimary: Colors.white,
           onSecondary: secondaryTextColor,
